@@ -103,19 +103,19 @@ TANK_HEIGHT = 28
 TANK_RATE = 6
 TANK_VELOCITY = 7
 
-# BRICK
-BRICK_GROUP = "bricks"
-BRICK_IMAGES = {
+# WALL
+WALL_GROUP = "bricks"
+WALL_IMAGES = {
     "r": [f"tanks/assets/images/{i:03}.png" for i in range(10, 19)],
     "o": [f"tanks/assets/images/{i:03}.png" for i in range(20, 29)],
     "b": [f"tanks/assets/images/{i:03}.png" for i in range(30, 39)],
     "t": [f"tanks/assets/images/{i:03}.png" for i in range(40, 49)]
 }
-BRICK_WIDTH = 80
-BRICK_HEIGHT = 28
-BRICK_DELAY = 0.5
-BRICK_RATE = 4
-BRICK_POINTS = 50
+WALL_WIDTH = 80
+WALL_HEIGHT = 28
+WALL_DELAY = 0.5
+WALL_RATE = 4
+WALL_POINTS = 50
 
 # DIALOG
 DIALOG_GROUP = "dialogs"
