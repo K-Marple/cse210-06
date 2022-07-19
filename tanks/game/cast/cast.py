@@ -65,7 +65,7 @@ class Cast:
             an instance of Actor.
         """
         result = None
-        if group in self._actors.key():
+        if group in self._actors.keys():
             result = self._actors[group][0]
         return result
 
