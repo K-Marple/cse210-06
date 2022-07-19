@@ -157,7 +157,7 @@ class SceneManager:
         body = Body(position, size, velocity)
         image = Image(BULLET_IMAGE)
         bullet = Bullet(body, image, True)
-        cast.add_actors(BULLET_GROUP, bullet)
+        cast.add_actor(BULLET_GROUP, bullet)
 
     def _add_walls(self, cast):
         cast.clear_actors(WALL_GROUP)
