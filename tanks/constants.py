@@ -107,9 +107,9 @@ TANK_VELOCITY = 7
 WALL_GROUP = "bricks"
 WALL_IMAGES = {
     "r": [f"tanks/assets/images/{i:03}.png" for i in range(10, 19)],
-    "o": [f"tanks/assets/images/{i:03}.png" for i in range(20, 29)],
-    "b": [f"tanks/assets/images/{i:03}.png" for i in range(30, 39)],
-    "t": [f"tanks/assets/images/{i:03}.png" for i in range(40, 49)]
+    "g": [f"tanks/assets/images/{i:03}.png" for i in range(20, 29)],
+    "s": [f"tanks/assets/images/{i:03}.png" for i in range(30, 39)],
+    "d": [f"tanks/assets/images/{i:03}.png" for i in range(40, 49)]
 }
 WALL_WIDTH = 80
 WALL_HEIGHT = 28
