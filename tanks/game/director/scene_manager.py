@@ -3,7 +3,7 @@ from constants import *
 from game.cast.animation import Animation
 from game.cast.bullet import Bullet
 from game.cast.body import Body
-from game.cast.walls import Walls
+from game.cast.wall import Wall
 from game.cast.image import Image
 from game.cast.label import Label
 from game.cast.point import Point
@@ -15,7 +15,7 @@ from game.script.change_scene_action import ChangeSceneAction
 from game.script.check_over_action import CheckOverAction
 from game.script.collide_borders_action import CollideBordersAction
 from game.script.collide_walls_action import CollideWallsAction
-from game.script.collide_tank_action import CollidTankAction
+from game.script.collide_tank_action import CollideTankAction
 from game.script.control_tank_action import ControlTankAction
 from game.script.draw_bullet_action import DrawBulletAction
 from game.script.draw_walls_action import DrawWallsAction
@@ -50,7 +50,7 @@ class SceneManager:
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS, AUDIO)
     COLLIDE_WALLS_ACTION = CollideWallsAction(PHYSICS, AUDIO)
-    COLLIDE_TANK_ACTION = CollidTankAction(PHYSICS, AUDIO)
+    COLLIDE_TANK_ACTION = CollideTankAction(PHYSICS, AUDIO)
     CONTROL_TANK_ACTION = ControlTankAction(KEYBOARD)
     DRAW_BULLET_ACTION = DrawBulletAction(VIDEO)
     DRAW_WALLS_ACTION = DrawWallsAction(VIDEO)
@@ -188,7 +188,7 @@ class SceneManager:
                     body = Body(position, size, velocity)
                     animation = Animation(images, WALL_RATE, WALL_DELAY)
 
-                    wall = Walls(body, animation, points)
+                    wall = Wall(body, animation, points)
                     cast.add_actor(WALL_GROUP, wall)
 
     def _add_dialog(self, cast, message):
