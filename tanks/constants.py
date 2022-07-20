@@ -27,7 +27,8 @@ FONT_SMALL = 32
 FONT_LARGE = 48
 
 # SOUND
-BOUNCE_SOUND = "tanks/assets/sounds/boing.wav"
+MOVEMENT_SOUND = "tanks/assets/sounds/tank_movement.wav"
+FIRE_SOUND = "tanks/assets/sounds/tank_fire.wav"
 WELCOME_SOUND = "tanks/assets/sounds/start.wav"
 OVER_SOUND = "tanks/assets/sounds/over.wav"
 
@@ -120,5 +121,5 @@ WALL_POINTS = 50
 # DIALOG
 DIALOG_GROUP = "dialogs"
 ENTER_TO_START = "PRESS ENTER TO START"
-PREP_TO_LAUNCH = "PREPARING TO LAUNCH"
+PREP_TO_LAUNCH = "WARMING THE ENGINES"
 WAS_GOOD_GAME = "GAME OVER"

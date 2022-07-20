@@ -18,5 +18,5 @@ class CollideTankAction(Action):
 
         if self._physics.has_collided(bullet_body, tank_body):
             bullet.bounce_y()
-            sound = Sound(BOUNCE_SOUND)
+            sound = Sound(FIRE_SOUND)
             self._audio.play_sound(sound)
