@@ -97,7 +97,7 @@ BULLET_VELOCITY = 6
 
 # TANK
 TANK_GROUP = "tanks"
-TANK_IMAGES = [f"tanks/assets/images/{n:03}" for n in range(100, 103)]
+TANK_IMAGES = "tanks/assets/images/050.png"
 TANK_WIDTH = 106
 TANK_HEIGHT = 28
 TANK_RATE = 6
