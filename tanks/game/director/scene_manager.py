@@ -53,7 +53,7 @@ class SceneManager:
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS, AUDIO)
     COLLIDE_WALLS_ACTION = CollideWallsAction(PHYSICS, AUDIO)
-    COLLIDE_TANK_ACTION = CollideTankAction(PHYSICS, AUDIO)
+    # COLLIDE_TANK_ACTION = CollideTankAction(PHYSICS, AUDIO)
     CONTROL_TANK_ACTION = ControlTankAction(KEYBOARD)
     CONTROL_BARRICADE_ACTION = ControlBarricadeAction(KEYBOARD)
     CONTROL_BULLET_ACTION = ControlBulletAction(KEYBOARD, AUDIO)
