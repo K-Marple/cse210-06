@@ -1,7 +1,7 @@
 from game.cast.actor import Actor
 
 
-class Wall(Actor):
+class Barricade(Actor):
     """A solid, square object dividing things."""
 
     def __init__(self, body, animation, points, debug=False):
