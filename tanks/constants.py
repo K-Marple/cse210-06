@@ -1,6 +1,3 @@
-import pathlib
-
-from pyray import get_gamepad_name
 from game.cast.color import Color
 
 # GENERAL GAME CONSTANTS
@@ -16,21 +13,21 @@ CENTER_X = SCREEN_WIDTH / 2
 CENTER_Y = SCREEN_HEIGHT / 2
 
 # FIELD
-FIELD_TOP = 60
+FIELD_TOP = 0
 FIELD_BOTTOM = SCREEN_HEIGHT
 FIELD_LEFT = 0
 FIELD_RIGHT = SCREEN_WIDTH
 
 # FONT
-FONT_FILE = "tanks/assets/fonts/zorque.otf"
+FONT_FILE = "tanks/assets/fonts\\zorque.otf"
 FONT_SMALL = 32
 FONT_LARGE = 48
 
 # SOUND
-MOVEMENT_SOUND = "tanks/assets/sounds/tank_movement.wav"
-FIRE_SOUND = "tanks/assets/sounds/tank_fire.wav"
-WELCOME_SOUND = "tanks/assets/sounds/start.wav"
-OVER_SOUND = "tanks/assets/sounds/over.wav"
+TANK_SOUND = "tanks/assets/sounds\\tank_movement.wav"
+FIRE_SOUND = "tanks/assets/sounds\\tank_fire.wav"
+WELCOME_SOUND = "tanks/assets/sounds\\start.wav"
+OVER_SOUND = "tanks/assets/sounds\\over.wav"
 
 # TEXT
 ALIGN_CENTER = 0
@@ -57,8 +54,8 @@ IN_PLAY = 3
 GAME_OVER = 4
 
 # LEVELS
-LEVEL_FILE = "tanks/assets/data/level-{:03}.txt"
-BASE_LEVELS = 5
+# LEVEL_FILE = "tanks/assets/data/level-{:03}.txt"
+# BASE_LEVELS = 5
 
 
 # SCRIPTING CONSTANTS
@@ -82,44 +79,54 @@ MAXIMUM_LIVES = 5
 
 # HUD
 HUD_MARGIN = 15
-LEVEL_GROUP = "level"
+# LEVEL_GROUP = "level"
+HIT_GROUP = "hit"
 LIVES_GROUP = "lives"
 SCORE_GROUP = "score"
-LEVEL_FORMAT = "LEVEL: {}"
+# LEVEL_FORMAT = "LEVEL: {}"
+HIT_FORMAT = "HITS: {}"
 LIVES_FORMAT = "LIVES: {}"
 SCORE_FORMAT = "SCORE: {}"
 
 # BULLET
 BULLET_GROUP = "bullet"
-BULLET_IMAGE = "tanks/assets/images/000.png"
-BULLET_WIDTH = 28
-BULLET_HEIGHT = 28
+BULLET_IMAGE = "tanks/assets/images\\000.png"
+BULLET_WIDTH = 4
+BULLET_HEIGHT = 6
 BULLET_VELOCITY = 6
 
 # TANK
 TANK_GROUP = "tanks"
-TANK_IMAGES = "tanks/assets/images/050.png"
-TANK_WIDTH = 106
-TANK_HEIGHT = 28
+TANK_IMAGES = "tanks/assets/images\\050.png"
+TANK_WIDTH = 28
+TANK_HEIGHT = 40
 TANK_RATE = 6
-TANK_VELOCITY = 7
+TANK_VELOCITY = 4
 
-# WALL
-WALL_GROUP = "bricks"
-WALL_IMAGES = {
-    "r": [f"tanks/assets/images/{i:03}.png" for i in range(10, 19)],
-    "g": [f"tanks/assets/images/{i:03}.png" for i in range(20, 29)],
-    "s": [f"tanks/assets/images/{i:03}.png" for i in range(30, 39)],
-    "d": [f"tanks/assets/images/{i:03}.png" for i in range(40, 49)]
-}
-WALL_WIDTH = 80
-WALL_HEIGHT = 28
-WALL_DELAY = 0.5
-WALL_RATE = 4
-WALL_POINTS = 50
+# BARRICADES
+BARRICADE_GROUP = "barricades"
+BARRICADE_VELOCITY = 3
+ROCK_BARRICADE_IMAGE = "tanks/assets/images\\010.png"
+ROCK_BARRICADE_WIDTH = 44
+ROCK_BARRICADE_HEIGHT = 44
+GRASS_BARRICADE_IMAGE = "tanks/assets/images\\020.png"
+GRASS_BARRICADE_WIDTH = 28
+GRASS_BARRICADE_HEIGHT = 28
+SAND_BARRICADE_IMAGE = "tanks/assets/images\\030.png"
+SAND_BARRICADE_WIDTH = 16
+SAND_BARRICADE_HEIGHT = 16
+DIRT_BARRICADE_IMAGE = "tanks/assets/images\\040.png" 
+DIRT_BARRICADE_WIDTH = 35
+DIRT_BARRICADE_HEIGHT = 35
+BARRICADE_POINTS_ROCK = 20
+BARRICADE_POINTS_SAND = 5
+BARRICADE_POINTS_GRASS = 10
+BARRICADE_POINTS_DIRT = 15
+# BARRICADE_DELAY = 0.5
+# BARRICADE_RATE = 4
 
 # DIALOG
 DIALOG_GROUP = "dialogs"
 ENTER_TO_START = "PRESS ENTER TO START"
-PREP_TO_LAUNCH = "WARMING THE ENGINES"
+SHOOTING = "SPACE TO SHOOT"
 WAS_GOOD_GAME = "GAME OVER"
