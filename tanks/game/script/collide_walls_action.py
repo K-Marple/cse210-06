@@ -10,18 +10,27 @@ class CollideWallsAction(Action):
         self._audio = audio
 
     def execute(self, cast, script, callback):
-        bullet = cast.get_first_actor(BULLET_GROUP)
-        walls = cast.get_actors(WALL_GROUP)
+        tank = cast.get_first_actor(TANK_GROUP)
+        barricades = cast.get_actors(BARRICADE_GROUP)
         stats = cast.get_first_actor(STATS_GROUP)
+        over_sound = Sound(OVER_SOUND)
 
-        for wall in walls:
-            bullet_body = bullet.get_body()
-            wall_body = wall.get_body()
+        for barricade in barricades:
+            tank_body = tank.get_body()
+            barricade_body = barricade.get_body()
 
-            if self._physics.has_collided(bullet_body, wall_body):
-                bullet.bounce_y()
-                sound = Sound(BOUNCE_SOUND)
-                self._audio.play_sound(sound)
-                points = wall.get_points()
+            if self._physics.has_collided(tank_body, barricade_body):
+                hits = barricade.get_hits()
+                stats.add_hits(hits)
+                points = barricade.get_points()
                 stats.add_points(points)
-                cast.remove_actor(WALL_GROUP, wall)
+                cast.clear_actors(BARRICADE_GROUP)
+                cast.clear_actors(BULLET_GROUP)
+                stats = cast.get_first_actor(STATS_GROUP)
+                stats.lose_life()
+
+                if stats.get_lives() > 0:
+                    callback.on_next(TRY_AGAIN)
+                else:
+                    callback.on_next(GAME_OVER)
+                    self._audio.play_sound(over_sound)

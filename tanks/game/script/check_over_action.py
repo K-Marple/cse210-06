@@ -8,7 +8,7 @@ class CheckOverAction(Action):
         pass
 
     def execute(self, cast, script, callback):
-        walls = cast. get_actors(WALL_GROUP)
+        walls = cast.get_actors(BARRICADE_GROUP)
         if len(walls) == 0:
             stats = cast.get_first_actor(STATS_GROUP)
             stats.next_level()
