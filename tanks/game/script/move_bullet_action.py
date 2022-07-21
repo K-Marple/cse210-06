@@ -8,7 +8,7 @@ class MoveBulletAction(Action):
         pass
 
     def execute(self, cast, script, callback):
-        bullet = cast.get_first_actor(BULLET_GROUP)
+        bullets = cast.get_first_actor(BULLET_GROUP)
         for bullet in bullets:
             if bullet == None:
                 return
