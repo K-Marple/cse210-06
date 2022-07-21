@@ -41,14 +41,24 @@ class Tank(Actor):
         new_position = position.add(velocity)
         self._body.set_position(new_position)
 
-    def swing_left(self):
+    def move_left(self):
         """Steers the tank to the left."""
         velocity = Point(-TANK_VELOCITY, 0)
         self._body.set_velocity(velocity)
 
-    def swing_right(self):
+    def move_right(self):
         """Steers the tank to the right."""
         velocity = Point(TANK_VELOCITY, 0)
+        self._body.set_velocity(velocity)
+
+    def move_up(self):
+        """Steers the tank upwards."""
+        velocity = Point(0, -TANK_VELOCITY)
+        self._body.set_velocity(velocity)
+
+    def move_down(self):
+        """Streers the tank downwards."""
+        velocity = Point(0, TANK_VELOCITY)
         self._body.set_velocity(velocity)
 
     def stop_moving(self):

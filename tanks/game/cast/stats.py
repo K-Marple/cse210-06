@@ -8,7 +8,7 @@ class Stats(Actor):
     def __init__(self, debug=False):
         """Constructs a new Stats."""
         super().__init__(debug)
-        self._level = 1
+        self._hits = 0
         self._lives = DEFAULT_LIVES
         self._score = 0
 
@@ -25,13 +25,13 @@ class Stats(Actor):
         """
         self._score += points
 
-    def get_level(self):
-        """Gets the level.
+    def add_hits(self, hits):
+        """Adds a hit for every barricade destroyed.
         
         Returns:
-            a number representing the level.
+            a number representing the number of barricades hit.
         """
-        return self._level
+        self._hits += hits
 
     def get_lives(self):
         """Gets the lives.
@@ -42,24 +42,32 @@ class Stats(Actor):
         return self._lives
 
     def get_score(self):
-        """Gets teh score.
+        """Gets the score.
         
         Returns:
             a number representing the score.
         """
         return self._score
 
+    def get_hits(self):
+        """Gets the hits.
+        
+        Returns:
+            a number representing the number of hits.
+        """
+        return self._hits
+
     def lose_life(self):
         """Removes one life."""
         if self._lives > 0:
             self._lives -= 1
 
-    def next_level(self):
-        """Adds one level."""
-        self._level += 1
+    # def next_level(self):
+    #     """Adds one level."""
+    #     self._level += 1
 
     def reset(self):
         """Resets the stats back to their default values."""
-        self._level = 1
+        self._hits = 0
         self._lives = DEFAULT_LIVES
         self._score = 0
