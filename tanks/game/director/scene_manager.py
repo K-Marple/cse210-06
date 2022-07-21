@@ -3,7 +3,7 @@ from constants import *
 from game.cast.animation import Animation
 from game.cast.bullet import Bullet
 from game.cast.body import Body
-from game.cast.wall import Wall
+from game.cast.wall import Barricade
 from game.cast.image import Image
 from game.cast.label import Label
 from game.cast.point import Point
@@ -17,6 +17,8 @@ from game.script.collide_borders_action import CollideBordersAction
 from game.script.collide_walls_action import CollideWallsAction
 from game.script.collide_tank_action import CollideTankAction
 from game.script.control_tank_action import ControlTankAction
+from game.script.control_barricades_action import ControlBarricadeAction
+from game.script.control_bullet_action import ControlBulletAction
 from game.script.draw_bullet_action import DrawBulletAction
 from game.script.draw_walls_action import DrawWallsAction
 from game.script.draw_dialog_action import DrawDialogAction
@@ -26,6 +28,7 @@ from game.script.end_drawing_action import EndDrawingAction
 from game.script.initialize_devices_action import InitializeDevicesAction
 from game.script.load_assets_action import LoadAssetsAction
 from game.script.move_bullet_action import MoveBulletAction
+from game.script.move_barricade_action import MoveBarricadeAction
 from game.script.move_tank_action import MoveTankAction
 from game.script.play_sound_action import PlaySoundAction
 from game.script.release_devices_action import ReleaseDevicesAction
@@ -52,6 +55,8 @@ class SceneManager:
     COLLIDE_WALLS_ACTION = CollideWallsAction(PHYSICS, AUDIO)
     COLLIDE_TANK_ACTION = CollideTankAction(PHYSICS, AUDIO)
     CONTROL_TANK_ACTION = ControlTankAction(KEYBOARD)
+    CONTROL_BARRICADE_ACTION = ControlBarricadeAction(KEYBOARD)
+    CONTROL_BULLET_ACTION = ControlBulletAction(KEYBOARD, AUDIO)
     DRAW_BULLET_ACTION = DrawBulletAction(VIDEO)
     DRAW_WALLS_ACTION = DrawWallsAction(VIDEO)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO)
@@ -61,6 +66,7 @@ class SceneManager:
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO, VIDEO)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO, VIDEO)
     MOVE_BULLET_ACTION = MoveBulletAction()
+    MOVE_BARRICADE_ACTION = MoveBarricadeAction()
     MOVE_TANK_ACTION = MoveTankAction()
     RELEASE_DEVICES_ACTION = ReleaseDevicesAction(AUDIO, VIDEO)
     START_DRAWING_ACTION = StartDrawingAction(VIDEO)
@@ -85,11 +91,9 @@ class SceneManager:
 
     def _prepare_new_game(self, cast, script):
         self._add_stats(cast)
-        self._add_level(cast)
+        self._add_hits(cast)
         self._add_lives(cast)
         self._add_score(cast)
-        self._add_bullet(cast)
-        self._add_walls(cast)
         self._add_tank(cast)
         self._add_dialog(cast, ENTER_TO_START)
 
@@ -102,10 +106,8 @@ class SceneManager:
         self._add_release_script(script)
 
     def _prepare_next_level(self, cast, script):
-        self._add_bullet(cast)
-        self._add_walls(cast)
         self._add_tank(cast)
-        self._add_dialog(cast, PREP_TO_LAUNCH)
+        self._add_dialog(cast, SHOOTING)
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
@@ -113,9 +115,8 @@ class SceneManager:
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO, WELCOME_SOUND))
 
     def _prepare_try_again(self, cast, script):
-        self._add_bullet(cast)
         self._add_tank(cast)
-        self._add_dialog(cast, PREP_TO_LAUNCH)
+        self._add_dialog(cast, SHOOTING)
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
@@ -123,16 +124,16 @@ class SceneManager:
         self._add_output_script(script)
 
     def _prepare_in_play(self, cast, script):
-        # self._activate_bullet(cast)
         cast.clear_actors(DIALOG_GROUP)
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, self.CONTROL_TANK_ACTION)
+        script.add_action(INPUT, self.CONTROL_BULLET_ACTION)
+        script.add_action(INPUT, self.CONTROL_BARRICADE_ACTION)
         self._add_update_script(script)
         self._add_output_script(script)
 
     def _prepare_game_over(self, cast, script):
-        self._add_bullet(cast)
         self._add_tank(cast)
         self._add_dialog(cast, WAS_GOOD_GAME)
 
@@ -143,53 +144,53 @@ class SceneManager:
 
     # CAST METHODS
 
-    def _activate_bullet(self, cast):
-        bullet = cast.get_first_actor(BULLET_GROUP)
-        bullet.release()
+    # def _activate_bullet(self, cast):
+    #     bullet = cast.get_first_actor(BULLET_GROUP)
+    #     bullet.release()
 
-    def _add_bullet(self, cast):
-        cast.clear_actors(BULLET_GROUP)
-        x = CENTER_X - BULLET_WIDTH / 2
-        y = SCREEN_HEIGHT - TANK_HEIGHT - BULLET_HEIGHT
-        position = Point(x, y)
-        size = Point(BULLET_WIDTH, BULLET_HEIGHT)
-        velocity = Point(0, 0)
-        body = Body(position, size, velocity)
-        image = Image(BULLET_IMAGE)
-        bullet = Bullet(body, image, True)
-        cast.add_actor(BULLET_GROUP, bullet)
+    # def _add_bullet(self, cast):
+    #     cast.clear_actors(BULLET_GROUP)
+    #     x = CENTER_X - BULLET_WIDTH / 2
+    #     y = SCREEN_HEIGHT - TANK_HEIGHT - BULLET_HEIGHT
+    #     position = Point(x, y)
+    #     size = Point(BULLET_WIDTH, BULLET_HEIGHT)
+    #     velocity = Point(0, 0)
+    #     body = Body(position, size, velocity)
+    #     image = Image(BULLET_IMAGE)
+    #     bullet = Bullet(body, image, True)
+    #     cast.add_actor(BULLET_GROUP, bullet)
 
-    def _add_walls(self, cast):
-        cast.clear_actors(WALL_GROUP)
+    # def _add_walls(self, cast):
+    #     cast.clear_actors(WALL_GROUP)
 
-        stats = cast.get_first_actor(STATS_GROUP)
-        level = stats.get_level() % BASE_LEVELS
-        filename = LEVEL_FILE.format(level)
+    #     stats = cast.get_first_actor(STATS_GROUP)
+    #     level = stats.get_level() % BASE_LEVELS
+    #     filename = LEVEL_FILE.format(level)
 
-        with open(filename, 'r') as file:
-            reader = csv.reader(file, skipinitialspace=True)
+    #     with open(filename, 'r') as file:
+    #         reader = csv.reader(file, skipinitialspace=True)
 
-            for r, row in enumerate(reader):
-                for c, column in enumerate(row):
-                    x = FIELD_LEFT + c * WALL_WIDTH
-                    y = FIELD_TOP + r * WALL_HEIGHT
-                    color = column[0]
-                    frames = int(column[1])
-                    points = WALL_POINTS
+    #         for r, row in enumerate(reader):
+    #             for c, column in enumerate(row):
+    #                 x = FIELD_LEFT + c * WALL_WIDTH
+    #                 y = FIELD_TOP + r * WALL_HEIGHT
+    #                 color = column[0]
+    #                 frames = int(column[1])
+    #                 points = WALL_POINTS
 
-                    if frames == 1:
-                        points *= 2
+    #                 if frames == 1:
+    #                     points *= 2
 
-                    position = Point(x, y)
-                    size = Point(WALL_WIDTH, WALL_HEIGHT)
-                    velocity = Point(0, 0)
-                    images = WALL_IMAGES[color][0:frames]
+    #                 position = Point(x, y)
+    #                 size = Point(WALL_WIDTH, WALL_HEIGHT)
+    #                 velocity = Point(0, 0)
+    #                 images = WALL_IMAGES[color][0:frames]
 
-                    body = Body(position, size, velocity)
-                    animation = Animation(images, WALL_RATE, WALL_DELAY)
+    #                 body = Body(position, size, velocity)
+    #                 animation = Animation(images, WALL_RATE, WALL_DELAY)
 
-                    wall = Wall(body, animation, points)
-                    cast.add_actor(WALL_GROUP, wall)
+    #                 wall = Wall(body, animation, points)
+    #                 cast.add_actor(WALL_GROUP, wall)
 
     def _add_dialog(self, cast, message):
         cast.clear_actors(DIALOG_GROUP)
@@ -198,12 +199,12 @@ class SceneManager:
         label = Label(text, position)
         cast.add_actor(DIALOG_GROUP, label)
 
-    def _add_level(self, cast):
-        cast.clear_actors(LEVEL_GROUP)
-        text = Text(LEVEL_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_LEFT)
+    def _add_hits(self, cast):
+        cast.clear_actors(HIT_GROUP)
+        text = Text(HIT_FORMAT, FONT_FILE, FONT_SMALL, ALIGN_LEFT)
         position = Point(HUD_MARGIN, HUD_MARGIN)
         label = Label(text, position)
-        cast.add_actor(LEVEL_GROUP, label)
+        cast.add_actor(HIT_GROUP, label)
 
     def _add_lives(self, cast):
         cast.clear_actors(LIVES_GROUP)
@@ -268,6 +269,7 @@ class SceneManager:
         script.clear_actions(UPDATE)
         script.add_action(UPDATE, self.MOVE_BULLET_ACTION)
         script.add_action(UPDATE, self.MOVE_TANK_ACTION)
+        script.add_action(UPDATE, self.MOVE_BARRICADE_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_WALLS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_TANK_ACTION)
