@@ -1,4 +1,3 @@
-import csv
 from constants import *
 from game.cast.animation import Animation
 from game.cast.bullet import Bullet
@@ -12,10 +11,10 @@ from game.cast.stats import Stats
 from game.cast.text import Text
 
 from game.script.change_scene_action import ChangeSceneAction
-from game.script.check_over_action import CheckOverAction
+# from game.script.check_over_action import CheckOverAction
 from game.script.collide_borders_action import CollideBordersAction
 from game.script.collide_walls_action import CollideWallsAction
-from game.script.collide_tank_action import CollideTankAction
+# from game.script.collide_tank_action import CollideTankAction
 from game.script.control_tank_action import ControlTankAction
 from game.script.control_barricades_action import ControlBarricadeAction
 from game.script.control_bullet_action import ControlBulletAction
@@ -50,8 +49,8 @@ class SceneManager:
     PHYSICS = RaylibPhysics()
     VIDEO = RaylibVideo()
 
-    CHECK_OVER_ACTION = CheckOverAction()
-    COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS, AUDIO)
+    # CHECK_OVER_ACTION = CheckOverAction()
+    # COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS, AUDIO)
     COLLIDE_WALLS_ACTION = CollideWallsAction(PHYSICS, AUDIO)
     # COLLIDE_TANK_ACTION = CollideTankAction(PHYSICS, AUDIO)
     CONTROL_TANK_ACTION = ControlTankAction(KEYBOARD)
