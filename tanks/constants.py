@@ -19,7 +19,7 @@ FIELD_LEFT = 0
 FIELD_RIGHT = SCREEN_WIDTH
 
 # FONT
-FONT_FILE = "tanks/assets/fonts\\MilitaryKid.otf"
+FONT_FILE = "tanks/assets/fonts\\MilitaryKid.ttf"
 FONT_SMALL = 32
 FONT_LARGE = 48
 
