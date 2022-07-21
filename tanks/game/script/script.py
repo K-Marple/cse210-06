@@ -43,7 +43,7 @@ class Script:
             a list of Action instances.
         """
         results = []
-        if group in self._actions:
+        if group in self._actions.keys():
             results = self._actions[group].copy()
         return results
 
