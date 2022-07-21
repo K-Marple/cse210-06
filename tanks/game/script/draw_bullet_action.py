@@ -8,13 +8,23 @@ class DrawBulletAction(Action):
         self._video = video
 
     def execute(self, cast, script, callback):
-        bullet = cast.get_first_actor(BULLET_GROUP)
-        body = bullet.get_body()
+        bullets = cast.get_actors(BULLET_GROUP)
+        for bullet in bullets:
+            if bullet == None:
+                return
 
-        if bullet.is_debug():
-            rectangle = body.get_rectangle()
-            self._video.draw_rectangle(rectangle, PURPLE)
+            else:
+                body = bullet.get_body()
 
-        image = bullet.get_image()
-        position = body.get_position()
-        self._video.draw_image(image, position)
+                if bullet.is_debug():
+                    rectangle = body.get_rectangle()
+                    self._video.draw_rectangle(rectangle, PURPLE)
+
+                image = bullet.get_image()
+                position = body.get_position()
+
+                y = position.get_y()
+                if y <= FIELD_TOP:
+                    cast.remove_actor(BULLET_GROUP, bullet)
+
+                self._video.draw_image(image, position)

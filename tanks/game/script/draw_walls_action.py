@@ -1,5 +1,6 @@
 from constants import *
 from game.script.action import Action
+from game.cast.point import Point
 
 
 class DrawWallsAction(Action):
@@ -8,16 +9,24 @@ class DrawWallsAction(Action):
         self._video = video
 
     def execute(self, cast, script, callback):
-        walls = cast.get_actors(WALL_GROUP)
+        barricades = cast.get_actors(BARRICADE_GROUP)
 
-        for wall in walls:
-            body = wall.get_body()
+        for barricade in barricades:
+            body = barricade.get_body()
 
-            if wall.is_debug():
+            if barricade.is_debug():
                 rectangle = body.get_rectangle()
                 self._video.draw_rectangle(rectangle, PURPLE)
 
-            animation = wall.get_animation()
-            image = animation.next_image()
+            image = barricade.get_image()
             position = body.get_position()
+
+            x = position.get_x()
+            y = position.get_y()
+
+            if y >= (FIELD_BOTTOM):
+                y = FIELD_TOP
+                position = Point(x, (y - 44))
+                body.set_position(position)
+
             self._video.draw_image(image, position)
