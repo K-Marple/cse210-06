@@ -1,19 +1,20 @@
 from constants import *
 from game.script.action import Action
+from game.cast.point import Point
 
 
-class MoveBulletAction(Action):
+class MoveBarricadeAction(Action):
 
     def __init__(self):
         pass
 
     def execute(self, cast, script, callback):
-        bullet = cast.get_first_actor(BULLET_GROUP)
-        for bullet in bullets:
-            if bullet == None:
+        barricades = cast.get_actors(BARRICADE_GROUP)
+        for barricade in barricades:
+            if barricade == None:
                 return
 
-            body = bullet.get_body()
+            body = barricade.get_body()
             position = body.get_position()
             velocity = body.get_velocity()
             position = position.add(velocity)
