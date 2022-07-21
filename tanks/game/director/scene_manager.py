@@ -272,6 +272,6 @@ class SceneManager:
         script.add_action(UPDATE, self.MOVE_BARRICADE_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_WALLS_ACTION)
-        script.add_action(UPDATE, self.COLLIDE_TANK_ACTION)
+        # script.add_action(UPDATE, self.COLLIDE_TANK_ACTION)
         script.add_action(UPDATE, self.MOVE_TANK_ACTION)
         script.add_aciton(UPDATE, self.CHECK_OVER_ACTION)
