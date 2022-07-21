@@ -1,6 +1,6 @@
 # cse210-06
 # Tanks
-Battle is based off the game Battle City. You drive your tank around trying to eliminate other tanks while protecting your fort.
+Tanks is based off the game Asteroid. You drive your tank around destroying barricades.
 
 ## Project Structure
 ---
