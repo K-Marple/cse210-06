@@ -19,15 +19,15 @@ FIELD_LEFT = 0
 FIELD_RIGHT = SCREEN_WIDTH
 
 # FONT
-FONT_FILE = "tanks/assets/fonts\\MilitaryKid.ttf"
+FONT_FILE = "cse210-06/tanks/assets/fonts/MilitaryKid.ttf"
 FONT_SMALL = 32
 FONT_LARGE = 48
 
 # SOUND
-TANK_SOUND = "tanks/assets/sounds\\tank_movement.wav"
-FIRE_SOUND = "tanks/assets/sounds\\tank_fire.wav"
-WELCOME_SOUND = "tanks/assets/sounds\\start.wav"
-OVER_SOUND = "tanks/assets/sounds\\over.wav"
+TANK_SOUND = "cse210-06/tanks/assets/sounds/tank_movement.wav"
+FIRE_SOUND = "cse210-06/tanks/assets/sounds/tank_fire.wav"
+WELCOME_SOUND = "cse210-06/tanks/assets/sounds/engaging.wav"
+OVER_SOUND = "cse210-06/tanks/assets/sounds/game_over.wav"
 
 # TEXT
 ALIGN_CENTER = 0
@@ -92,14 +92,14 @@ SCORE_FORMAT = "SCORE: {}"
 
 # BULLET
 BULLET_GROUP = "bullet"
-BULLET_IMAGE = "tanks/assets/images\\000.png"
+BULLET_IMAGE = "cse210-06/tanks/assets/images/000.png"
 BULLET_WIDTH = 4
 BULLET_HEIGHT = 6
 BULLET_VELOCITY = 6
 
 # TANK
 TANK_GROUP = "tanks"
-TANK_IMAGES = "tanks/assets/images\\050.png"
+TANK_IMAGES = "cse210-06/tanks/assets/images/050.png"
 TANK_WIDTH = 28
 TANK_HEIGHT = 40
 TANK_RATE = 6
@@ -108,16 +108,16 @@ TANK_VELOCITY = 4
 # BARRICADES
 BARRICADE_GROUP = "barricades"
 BARRICADE_VELOCITY = 3
-ROCK_BARRICADE_IMAGE = "tanks/assets/images\\010.png"
+ROCK_BARRICADE_IMAGE = "cse210-06/tanks/assets/images\\010.png"
 ROCK_BARRICADE_WIDTH = 44
 ROCK_BARRICADE_HEIGHT = 44
-GRASS_BARRICADE_IMAGE = "tanks/assets/images\\020.png"
+GRASS_BARRICADE_IMAGE = "cse210-06/tanks/assets/images\\020.png"
 GRASS_BARRICADE_WIDTH = 28
 GRASS_BARRICADE_HEIGHT = 28
-SAND_BARRICADE_IMAGE = "tanks/assets/images\\030.png"
+SAND_BARRICADE_IMAGE = "cse210-06/tanks/assets/images\\030.png"
 SAND_BARRICADE_WIDTH = 16
 SAND_BARRICADE_HEIGHT = 16
-DIRT_BARRICADE_IMAGE = "tanks/assets/images\\040.png" 
+DIRT_BARRICADE_IMAGE = "cse210-06/tanks/assets/images\\040.png" 
 DIRT_BARRICADE_WIDTH = 35
 DIRT_BARRICADE_HEIGHT = 35
 BARRICADE_POINTS_ROCK = 20

@@ -9,6 +9,6 @@ class LoadAssetsAction(Action):
         self._video = video
 
     def execute(self, cast, script, callback):
-        self._audio.load_sounds("tanks/assets/sounds")
-        self._video.load_fonts("tanks/assets/fonts")
-        self._video.load_images("tanks/assets/images")
+        self._audio.load_sounds("cse210-06/tanks/assets/sounds")
+        self._video.load_fonts("cse210-06/tanks/assets/fonts")
+        self._video.load_images("cse210-06/tanks/assets/images")

@@ -25,8 +25,6 @@ class RaylibVideo(Video):
 
     def draw_image(self, image, position):
         filepath = image.get_filename()
-        # fixed os dependent filepath
-        filepath = str(pathlib.Path(filepath))
         texture = self._textures[filepath]
         x = position.get_x()
         y = position.get_y()
@@ -50,8 +48,6 @@ class RaylibVideo(Video):
 
     def draw_text(self, text, position):
         filepath  = text.get_fontfile()
-        # fixed os dependent filepath
-        filepath = str(pathlib.Path(filepath))
         value = text.get_value()
         size = text.get_size()
         spacing = 0
@@ -116,7 +112,6 @@ class RaylibVideo(Video):
             filename = os.path.join(directory, file)
             extension = pathlib.Path(filename).suffix.lower()
             if extension in filter:
-                filename = str(pathlib.Path(filename))
                 filepaths.append(filename)
         return filepaths
 
