@@ -47,15 +47,14 @@ class RaylibVideo(Video):
             pyray.draw_rectangle_lines(x, y, width, height, raylib_color)
 
     def draw_text(self, text, position):
-        # filepath  = text.get_fontfile()
+        filepath  = text.get_fontfile()
         value = text.get_value()
         size = text.get_size()
         spacing = 0
         alignment = text.get_alignment()
         tint = self._to_raylib_color(Color(255, 255, 255))
 
-        # font = self._fonts[filepath]
-        font = os.path("cse210-06/tanks/assets/fonts/military_kid.ttf")
+        font = self._fonts[filepath]
         text_image = pyray.image_text_ex(font, value, size, spacing, tint)
 
         x = position.get_x()
